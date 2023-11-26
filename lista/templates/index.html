@@ -1,18 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %} 
-    <nav class="navbar">
-        <h1 class="title">Lista de tarefas</h1> <hr>
-    </nav><br>
+
+    <h1 class="title">Lista de tarefas</h1>
+    <br>
 
     <div class="">
-        <form action="newtarefa"> 
-        
-            <button type="submit" class="botao" ><i class="fa-solid fa-plus"></i> Add Tarefa</button>
+        <form action="newtarefa/"> 
+           
+            <div class="div-btn">
+               <a id="add-link" href="newtarefa/"><i class="fa-solid fa-plus"></i> Adicionar arefa</a>
+            </div>
+            <div class="div-search">
+                <input class="form-control"  type="search" id="search" name="search" placeholder="Digite o nome da tarefa para buscar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if mesage.tags %}class="alert alert {{message.tags}}"{% endif %}></li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            
         </form>
+        <br>
         <table class="table">
             <thead>
-                <tr class="title-table">
+                <tr class="title-table"><th></th>
                     <th>#</th>
                     <th>Tarefa</th>
                     <th>Data</th>
@@ -22,13 +38,13 @@
             </thead>
             <tbody class="table-group-divider">
                 {% for tarefa in tarefas  %}
-                <tr>
+                <tr><th></th>
                     <th>{{forloop.counter}}</th>
                     <th>{{tarefa.tarefa}}</th>
                     <th>{{tarefa.data}}</th>
                     <th>{{tarefa.hora}}</th>
-                    <th><a href="delete_cliente/{{cliente.id}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="update_cliente/{{cliente.id}}"><i class="fa-solid fa-trash-can"></i></a>
+                    <th><a href="edittarefa/{{tarefa.id}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="deletetarefa/{{tarefa.id}}"><i class="fa-solid fa-trash-can"></i></a>
                     </th>
                 </tr>
                 {% endfor %}

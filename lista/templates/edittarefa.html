@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Editando {{tarefa.tarefa}} {% endblock%}
+
+{% block content %} 
+<h1> Editando {{tarefa.tarefa}}</h1>
+<form action="." method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Editar tarefa">
+</form>
+{% endblock%}

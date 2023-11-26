@@ -8,5 +8,6 @@ class Tarefa(models.Model):
     hora = models.TimeField(null=True, blank= True)
 
 
+
     def __str__(self):
         return self.tarefa

@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
 from .models import Tarefa
 from .forms import TerefaForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -25,8 +26,31 @@ def newtarefa(request):
             form = TerefaForm()
             return redirect('/')
         else:
-          context = {'form' : form}
           return render(request, 'index.html', context)
-        
 
-    
+
+
+def edittarefa(request, id):
+    tarefa = get_object_or_404(Tarefa, pk=id)
+    form = TerefaForm(instance=tarefa)
+
+    if(request.method == 'POST'):
+        form = TerefaForm(request.POST, instance=tarefa)
+
+        if(form.is_valid()):
+            form.save()
+            form = TerefaForm()
+            return redirect('/')
+        else:
+            return render (request, 'edittarefa.html', {'form': form, 'tarefa': tarefa})
+
+    else:
+        return render (request, 'edittarefa.html', {'form': form, 'tarefa': tarefa})
+
+
+
+def deteletarefa(request, id):
+    tarefa = get_object_or_404(Tarefa, pk=id)
+    tarefa.delete()
+    messages.info(request, 'Tarefa deletada com sucesso!')
+    return redirect('/')
