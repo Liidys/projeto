@@ -10,14 +10,18 @@ from django.contrib import messages
 def lista(request):
     tarefas = Tarefa.objects.all()
     context = {'tarefas' : tarefas}
-    return render(request, 'index.html', context)
+    return render(request, 'lista/index.html', context)
+
+def vertarefa(request, id):
+    tarefa = get_object_or_404(Tarefa, pk=id)
+    return render(request, 'lista/tarefas.html')
 
 
 def newtarefa(request):
     if request.method == 'GET':
         form = TerefaForm()
         context = {'form' : form}
-        return render(request, 'newtarefa.html', context)
+        return render(request, 'lista/newtarefa.html', context)
     else:
         form = TerefaForm(request.POST)
         if form.is_valid():
@@ -26,7 +30,7 @@ def newtarefa(request):
             form = TerefaForm()
             return redirect('/')
         else:
-          return render(request, 'index.html', context)
+          return render(request, 'lista/index.html', context)
 
 
 
@@ -42,10 +46,10 @@ def edittarefa(request, id):
             form = TerefaForm()
             return redirect('/')
         else:
-            return render (request, 'edittarefa.html', {'form': form, 'tarefa': tarefa})
+            return render (request, 'lista/edittarefa.html', {'form': form, 'tarefa': tarefa})
 
     else:
-        return render (request, 'edittarefa.html', {'form': form, 'tarefa': tarefa})
+        return render (request, 'lista/edittarefa.html', {'form': form, 'tarefa': tarefa})
 
 
 

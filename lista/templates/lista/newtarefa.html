@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Adicionar tarefa {% endblock%}
+
+<div class="div-newt">
+    {% block content %}
+    <h1>Preencha os dados abaixo:</h1>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Salvar tarefa">
+    </form>
+    {% endblock%}
+</div>
+

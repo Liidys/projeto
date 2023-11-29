@@ -1,9 +1,10 @@
 body {
     font-family: sans-serif;
+    background-image: linear-gradient(to right,#91ac9a, #cedfdf, #8fb8ca);
 }
 
 .navbar {
-    background-color: rgb(78, 190, 61);
+    background-color: #91ac9a;
 }
 
 .title {
@@ -15,7 +16,7 @@ body {
 }
    
 .div-btn {
-    background-color: #4EBE3D;
+    background-color: #77a8bb;
     cursor: pointer;
     display: inline-block;
     border-bottom: 5px;
@@ -68,8 +69,15 @@ ul.messages li {
 
 .info-del {
     padding: 0;
-    margin-left: 10px;
+    margin-left: 10px;  
 }
+
+.table {
+    border-radius: 5px;
+}
+
+
+
 
 
 
