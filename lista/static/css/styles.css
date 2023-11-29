@@ -66,6 +66,10 @@ ul.messages li {
     list-style: none;
 }
 
+.info-del {
+    padding: 0;
+    margin-left: 10px;
+}
 
 
 

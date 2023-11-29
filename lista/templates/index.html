@@ -6,8 +6,6 @@
     <br>
 
     <div class="">
-        <form action="newtarefa/"> 
-           
             <div class="div-btn">
                <a id="add-link" href="newtarefa/"><i class="fa-solid fa-plus"></i> Adicionar arefa</a>
             </div>
@@ -15,16 +13,16 @@
                 <input class="form-control"  type="search" id="search" name="search" placeholder="Digite o nome da tarefa para buscar">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li {% if mesage.tags %}class="alert alert {{message.tags}}"{% endif %}></li>{{message}}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
             
-        </form>
+            <div class="info-del">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if mesage.tags %}class="alert alert {{message.tags}}"{% endif %}></li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+            </div>
         <br>
         <table class="table">
             <thead>
