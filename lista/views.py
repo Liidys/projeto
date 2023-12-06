@@ -1,22 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404
 from .models import Tarefa
 from .forms import TerefaForm
 from django.contrib import messages
 
-
 # Create your views here.
 
+# Página principal, listar todas as tarefas com a funçào de buscar
+
 def lista(request):
-    tarefas = Tarefa.objects.all()
-    context = {'tarefas' : tarefas}
-    return render(request, 'lista/index.html', context)
+    search = request.GET.get('search')
 
-def vertarefa(request, id):
+    if(search):
+        tarefas = Tarefa.objects.filter(tarefa__icontains= search)
+    else:
+        tarefas = Tarefa.objects.all()
+    return render(request, 'lista/index.html', {'tarefas' : tarefas})
+
+# read
+def tarefas(request, id):
     tarefa = get_object_or_404(Tarefa, pk=id)
-    return render(request, 'lista/tarefas.html')
+    return render(request, 'lista/tarefas.html', {'tarefa' : tarefa})
 
-
+# criar
 def newtarefa(request):
     if request.method == 'GET':
         form = TerefaForm()
@@ -33,6 +38,7 @@ def newtarefa(request):
           return render(request, 'lista/index.html', context)
 
 
+# update
 
 def edittarefa(request, id):
     tarefa = get_object_or_404(Tarefa, pk=id)
@@ -43,6 +49,7 @@ def edittarefa(request, id):
 
         if(form.is_valid()):
             form.save()
+            messages.info(request, 'Tarefa editada com sucesso!')
             form = TerefaForm()
             return redirect('/')
         else:
@@ -52,7 +59,7 @@ def edittarefa(request, id):
         return render (request, 'lista/edittarefa.html', {'form': form, 'tarefa': tarefa})
 
 
-
+# delete
 def deteletarefa(request, id):
     tarefa = get_object_or_404(Tarefa, pk=id)
     tarefa.delete()

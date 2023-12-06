@@ -2,6 +2,8 @@
 
 {% block content %} 
 
+
+
     <h1 class="title">Lista de tarefas</h1>
     <br>
 
@@ -10,27 +12,27 @@
                <a id="add-link" href="newtarefa/"><i class="fa-solid fa-plus"></i> Adicionar arefa</a>
             </div>
             <div class="div-search">
-                <input class="form-control"  type="search" id="search" name="search" placeholder="Digite o nome da tarefa para buscar">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <form method="GET" id="search-form">
+                    <input class="form-control"  type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar" value="{{request.GET.search}}">
+                    <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
+                </form>
             </div>
             
             <div class="info-del">
                 {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
-                            <li {% if mesage.tags %}class="alert alert {{message.tags}}"{% endif %}></li>{{message}}</li>
+                            <li {% if mesage.tags %}class="alert alert {{message.tags}}"{% endif %}></li> <p class="msg-del">{{message}}</p> </li>
                         {% endfor %}
                     </ul>
                     {% endif %}
             </div>
         <br>
         <table class="table">
-            <thead class="title-table">
+            <thead>
                 <tr><th></th>
                     <th>#</th>
                     <th>Tarefa</th>
-                    <th>Data</th>
-                    <th>Horário</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -38,11 +40,9 @@
                 {% for tarefa in tarefas  %}
                 <tr><th></th>
                     <th>{{forloop.counter}}</th>
-                    <th>{{tarefa.tarefa}}</th>
-                    <th>{{tarefa.data}}</th>
-                    <th>{{tarefa.hora}}</th>
+                    <th><a class="link" href="tarefas/{{tarefa.id}}">{{tarefa.tarefa}}</a></th>
                     <th><a href="edittarefa/{{tarefa.id}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="deletetarefa/{{tarefa.id}}"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="deletetarefa/{{tarefa.id}}" class="delete-btn"><i class="fa-solid fa-trash-can"></i></a>
                     </th>
                 </tr>
                 {% endfor %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Tarefa {% endblock%}
+
+{% block content %} 
+    
+    <div class="container">
+        <h1 class="title-pag">{{tarefa.tarefa}}</h1>
+        <p>{{tarefa.data}}</p>
+        <p>{{tarefa.hora}}</p>
+        <button class="btn-form-voltar2" onclick='location.href="/"'>Voltar</button>
+    </div>
+    
+{% endblock %}

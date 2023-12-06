@@ -3,10 +3,13 @@
 {% block title %} Editando {{tarefa.tarefa}} {% endblock%}
 
 {% block content %} 
-<h1> Editando {{tarefa.tarefa}}</h1>
-<form action="." method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Editar tarefa">
-</form>
+    <div class="container">
+        <form action="." method="POST">
+            <h1 class="title-pag"> Editando: {{tarefa.tarefa}}</h1>
+                {% csrf_token %}
+                {{form.as_p}}
+            <input class="btn-form" type="submit" value="Editar tarefa"><br>
+            <button class="btn-form-voltar" onclick='location.href="/"'>Voltar</button>
+        </form>
+    </div>
 {% endblock%}
